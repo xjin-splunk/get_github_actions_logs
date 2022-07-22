@@ -1,0 +1,27 @@
+name: Get Github Actions Logs
+
+on:
+  push:
+    branches:
+      - "main" 
+
+
+jobs:
+  Get-Github-Actions-Logs: 
+    runs-on: ubuntu-latest 
+    name: Get Github Actions Logs
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Upload Json
+        uses: actions/upload-artifact@v2
+        with:
+          name: Json-file
+          path: comments.json
+
+      - name: Get Logs
+        uses: ./
+
+
