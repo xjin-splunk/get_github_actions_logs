@@ -11149,10 +11149,12 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 
+const githubToken = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("token");
+
 // Octokit.js
 // https://github.com/octokit/core.js#readme
 const octokit = new _octokit_rest__WEBPACK_IMPORTED_MODULE_2__["default"]({
-    auth: `${(_actions_github__WEBPACK_IMPORTED_MODULE_1___default().token)}`
+    auth: `${githubToken}`
 })
 
 await octokit.request('GET /xjin-splunk/get_github_actions_logs/actions/runs', {
