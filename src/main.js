@@ -6,9 +6,7 @@ const githubToken = core.getInput("token");
 
 // Octokit.js
 // https://github.com/octokit/core.js#readme
-const octokit = new Octokit({
-    auth: `${githubToken}`
-})
+const octokit = github.getOctokit(githubToken);
 
 await octokit.request('GET /xjin-splunk/get_github_actions_logs/actions/runs', {
     owner: 'xjin-splunk',
