@@ -9051,8 +9051,6 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 
-
-
 async function run(){
     const githubToken = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("token");
 
@@ -9063,12 +9061,12 @@ async function run(){
     await octokit.request('GET /xjin-splunk/get_github_actions_logs/actions/runs', {
         owner: 'xjin-splunk',
         repo: 'get_github_actions_logs'
-    }).then((data) => {console.log(data)}).catch(concole.log("get log failed"));
+    }).then((data) => {console.log(data)});
 
     
 };
 
-run();
+run().catch(concole.log("get log failed"));
 })();
 
 module.exports = __webpack_exports__;
