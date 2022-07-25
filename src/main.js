@@ -16,4 +16,4 @@ async function run(){
     
 };
 
-run().catch(concole.log("get log failed"));
+run().catch(console.log("get log failed"));
