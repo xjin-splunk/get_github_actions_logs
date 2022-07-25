@@ -1,5 +1,6 @@
-import core from "@actions/core";
-import github from "@actions/github";
+const { core } = require("@actions/core");
+const { github } = require("@actions/github");
+
 
 async function run(){
     // const githubToken = core.getInput("token");
