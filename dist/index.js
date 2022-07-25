@@ -9060,12 +9060,12 @@ async function run(){
     // https://github.com/octokit/core.js#readme
     const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1___default().getOctokit(githubToken);
     
-    const data = await octokit.request('GET /xjin-splunk/get_github_actions_logs/actions/runs', {
+    await octokit.request('GET /xjin-splunk/get_github_actions_logs/actions/runs', {
         owner: 'xjin-splunk',
         repo: 'get_github_actions_logs'
-    })
+    }).then((data) => {console.log(data)});
 
-    console.log(data);
+    
 };
 
 run();
