@@ -9052,11 +9052,12 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 async function run(){
-    const githubToken = _actions_core__WEBPACK_IMPORTED_MODULE_0___default().getInput("token");
+    // const githubToken = core.getInput("token");
 
     // Octokit.js
     // https://github.com/octokit/core.js#readme
-    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1___default().getOctokit(githubToken);
+    // const octokit = github.getOctokit(githubToken);
+    const octokit = _actions_github__WEBPACK_IMPORTED_MODULE_1___default().getOctokit('${github.token}');
     
     await octokit.request('GET /xjin-splunk/get_github_actions_logs/actions/runs', {
         owner: 'xjin-splunk',
