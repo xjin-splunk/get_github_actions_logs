@@ -17,7 +17,7 @@ jobs:
 
       - name: Get Logs
         uses: ./
-        with: \
+        with: 
           repo_owner: "xjin-splunk",
           repo_name: "get_github_actions_logs"
 
