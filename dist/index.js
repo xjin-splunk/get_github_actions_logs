@@ -9018,7 +9018,7 @@ async function run(){
     
     const logURL = 'https://api.github.com/repos/'+repo_owner+'/'+repo_name+'/'+'actions/runs?owner='+repo_owner+'&repo='+repo_name
     
-    await octokit.request('GET '+logURL).then((data) => {console.log(data.url)});
+    await octokit.request('GET '+logURL).then((data) => {console.log(data.url.workflow_runs[0])});
     // await octokit.request('GET '+logURL).then((data) => {console.log(data.url); await octokit.request('GET '+data.url).then((data)=>{console.log(data)})});
 };
 
