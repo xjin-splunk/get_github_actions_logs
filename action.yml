@@ -1,19 +1,22 @@
-name: 'Get Github Actions Logs'
+name: 'Show Comments in Actions'
 inputs:
-  token:
-    description: 'GitHub token'
-    default: ${{github.token}}
+  json_file:
+    description: 'Where to find the json output of the comments'
     required: true
+    default: 'comments.json'
+  
+  vt_api_key:
+    description: 'virusTotal API token'
+    required: true  
+    
+  repo_name:
+    description: 'repo name'
+    required: true  
 
   repo_owner:
-    description: 'name of the repo owner to collect logs'
-    required: true
-  
-  repo_name:
-    description: 'name of the repo to collect logs'
-    required: true
-  
-  
+    description: 'repo_owner'
+    required: true  
+
 runs:
   using: 'node12'
   main: 'dist/index.js'

@@ -1,0 +1,56 @@
+# name of the worklow
+name: Upload and Display Json
+
+# only run this workflow "on" the condition when there is a "push" on "main" branch.
+on:
+  push:
+    branches:
+      - "main" 
+      - "test"
+
+# define list of "jobs" in the current workflow 
+jobs:
+  Upload-Display-Json: # name of the current job
+    runs-on: ubuntu-latest  # environment 
+    name: Upload and Display Json File on Main
+
+    # define each "steps" of the current job
+    steps:
+        # name of the first step is "Checkout", which "uses" an existing 
+        # task from "actions/checkout@v2" that pulls this repo into work space. 
+        # "@v2" is the requried version tag.
+        # You can find more pre-defined actions here: 
+        # https://github.com/actions/
+      - name: Checkout
+        uses: actions/checkout@v2
+
+        # name of the second step is "Upload Json", which uploads a give file
+        # use the keyword "with" to specify the path of the file
+      - name: Upload Json
+        uses: actions/upload-artifact@v2
+        with:
+          name: Json-file
+          path: comments.json
+
+      # use third-party actions to upload and virus-scan a file 
+      - name: Scan file using third-party action
+        uses: crazy-max/ghaction-virustotal@v3
+        with:
+          vt_api_key: ${{ secrets.VT_API_KEY }}   # virusTotal Api Key
+          files: comments.json                    # path to the file you want to scan
+
+      - name: Display comment
+        # Use the action defined in this repository
+        uses: ./
+        with:
+          json_file: "comments.json"
+
+       - name: Get Logs
+        # Use the action defined in this repository
+        uses: xjin-splunk/get_github_actions_logs@main
+        with:
+          repo_owner: xjin-splunk
+          repo_name: get_github_actions_logs
+
+
+

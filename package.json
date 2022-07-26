@@ -1,28 +1,31 @@
 {
-  "name": "get_github_actions_logs",
+  "name": "ts-tutorial",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Github Actions",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build src/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && ncc build lib/main.js",
+    "format": "prettier --write **/*.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xjin-splunk/get_github_actions_logs.git"
+    "url": "git+https://github.com/xjin-splunk/ts-tutorial.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xjin-splunk/get_github_actions_logs/issues"
+    "url": "https://github.com/xjin-splunk/ts-tutorial/issues"
   },
-  "homepage": "https://github.com/xjin-splunk/get_github_actions_logs#readme",
+  "homepage": "https://github.com/xjin-splunk/ts-tutorial#readme",
   "dependencies": {
     "@actions/core": "^1.9.0",
-    "@actions/github": "^5.0.3",
-    "@octokit/rest": "^19.0.3"
+    "@actions/github": "^5.0.3"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.34.0"
+    "@types/node": "^18.0.3",
+    "@vercel/ncc": "^0.34.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
   }
 }
