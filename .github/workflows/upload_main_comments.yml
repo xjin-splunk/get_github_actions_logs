@@ -4,8 +4,7 @@ name: Upload and Display Json
 # only run this workflow "on" the condition when there is a "push" on "main" branch.
 on:
   push:
-    branches:
-      - "main" 
+    branches: 
       - "test"
 
 # define list of "jobs" in the current workflow 
@@ -45,8 +44,7 @@ jobs:
         with:
           json_file: "comments.json"
 
-       - name: Get Logs
-        # Use the action defined in this repository
+      - name: Get Logs
         uses: xjin-splunk/get_github_actions_logs@main
         with:
           repo_owner: xjin-splunk
