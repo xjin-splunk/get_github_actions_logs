@@ -3,7 +3,7 @@ name: Upload and Display Json
 
 # only run this workflow "on" the condition when there is a "push" on "main" branch.
 on:
-  pull_request:
+  push:
     branches: 
       - "test"
 
