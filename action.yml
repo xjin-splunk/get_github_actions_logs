@@ -1,10 +1,5 @@
 name: 'Get Github Actions Logs'
 inputs:
-  json_file:
-    description: 'Where to find the json output of the comments'
-    required: true
-    default: 'comments.json'
-
   token:
     description: 'GitHub token'
     default: ${{github.token}}
