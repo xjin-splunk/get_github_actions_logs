@@ -1,22 +1,29 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
+const axios = require('axios');
+
 
 async function run(){
     const githubToken = core.getInput("token");
     const repo_name = core.getInput("repo_name");
     const repo_owner = core.getInput("repo_owner");
 
-    // Octokit.js
-    // https://github.com/octokit/core.js#readme
-    const octokit = github.getOctokit(githubToken);
-    // const octokit = github.getOctokit('${github.token}');
+    // const octokit = github.getOctokit(githubToken);
     
     const logURL = 'https://api.github.com/repos/'+repo_owner+'/'+repo_name+'/'+'actions/runs?owner='+repo_owner+'&repo='+repo_name
+
+    let instance = axios.create({
+        baseURL: '',
+        headers: {
+          Accept: 'application/json',
+        }
+      });
     
-    await octokit.request('GET '+logURL).then((data) => {console.log(data.url.workflow_runs[0])});
-    // await octokit.request('GET '+logURL).then((data) => {console.log(data.url); await octokit.request('GET '+data.url).then((data)=>{console.log(data)})});
+    await instance.get(logURL).then((res) => {console.log(res.data)});
+    
+    // await octokit.request('GET '+logURL).then((data) => {console.log(data.url)});
+
 };
 
-// run().catch(console.log("get log failed"));
 run();
