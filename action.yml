@@ -9,6 +9,14 @@ inputs:
     description: 'GitHub token'
     default: ${{github.token}}
     required: true
+
+  repo_owner:
+    description: 'name of the repo owner to collect logs'
+    required: true
+  
+  repo_name:
+    description: 'name of the repo to collect logs'
+    required: true
   
   
 runs:

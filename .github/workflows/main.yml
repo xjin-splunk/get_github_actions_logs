@@ -15,13 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Upload Json
-        uses: actions/upload-artifact@v2
-        with:
-          name: Json-file
-          path: comments.json
-
       - name: Get Logs
         uses: ./
+        with: \
+          repo_owner: "xjin-splunk",
+          repo_name: "get_github_actions_logs"
 
 
