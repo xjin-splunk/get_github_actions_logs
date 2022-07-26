@@ -9016,10 +9016,9 @@ async function run(){
     const octokit = github.getOctokit(githubToken);
     // const octokit = github.getOctokit('${github.token}');
     
-    await octokit.request('GET /repos/'+repo_owner+'/'+repo_name+'/actions/runs', {
-        owner: `${repo_owner}`,
-        repo: `${repo_name}`
-    }).then((data) => {console.log(data)}).catch(console.log("get log failed"));
+    const logURL = 'https://api.github.com/repos/'+repo_owner+'/'+repo_name+'/'+'actions/runs?owner='+repo_owner+'&repo='+repo_name
+    
+    await octokit.request('GET '+logURL).then((data) => {console.log(data)}).catch(console.log("get log failed"));
 };
 
 run().catch(console.log("get log failed"));
