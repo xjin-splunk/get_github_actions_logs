@@ -13971,7 +13971,7 @@ async function getMetadata(){
         }
       });
     
-    return await instance.get(logURL).then((res) => {return res.data});
+    return await instance.get(logURL).then((res) => {return res.data}).catch("at getMetadata");
 
 };
 
@@ -13983,7 +13983,7 @@ async function getJobsURL(jobsURL){
         }
       });
     
-    return await instance.get(jobsURL).then((res) => {return res.data});
+    return await instance.get(jobsURL).then((res) => {return res.data}).catch("at getJobsURL");
 }
 
 async function parseJson(){
@@ -13993,13 +13993,13 @@ async function parseJson(){
     console.log(cur_attempt.id);
     console.log(cur_attempt.name);
     console.log(cur_attempt.conclusion);
-    console.log(cur_attempt.jobs_url);
+    console.log(cur_attempt.url);
 
-    let jobsMetadata = await getJobsURL(cur_attempt.jobs_url);
+    let jobsMetadata = await getJobsURL(cur_attempt.jobs_url).catch("at parseJson");
     console.log(jobsMetadata);
 };
 
-parseJson();
+parseJson().catch("at main");
 })();
 
 module.exports = __webpack_exports__;
