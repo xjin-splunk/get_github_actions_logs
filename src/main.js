@@ -4,12 +4,9 @@ const github = require("@actions/github");
 const axios = require('axios');
 
 
-async function run(){
-    const githubToken = core.getInput("token");
+async function getMetadata(){
     const repo_name = core.getInput("repo_name");
     const repo_owner = core.getInput("repo_owner");
-
-    // const octokit = github.getOctokit(githubToken);
     
     const logURL = 'https://api.github.com/repos/'+repo_owner+'/'+repo_name+'/'+'actions/runs?owner='+repo_owner+'&repo='+repo_name
 
@@ -20,10 +17,32 @@ async function run(){
         }
       });
     
-    await instance.get(logURL).then((res) => {console.log(res.data)});
-    
-    // await octokit.request('GET '+logURL).then((data) => {console.log(data.url)});
+    return await instance.get(logURL).then((res) => {return res.data});
 
 };
 
-run();
+async function getJobsURL(jobsURL){
+    let instance = axios.create({
+        baseURL: '',
+        headers: {
+          Accept: 'application/json',
+        }
+      });
+    
+    return await instance.get(jobsURL).then((res) => {return res.data});
+}
+
+async function parseJson(){
+    let rawMetadata = await getMetadata();
+    let cur_attempt = rawMetadata.workflow_runs[0];
+    console.log(cur_attempt.created_at);
+    console.log(cur_attempt.id);
+    console.log(cur_attempt.name);
+    console.log(cur_attempt.conclusion);
+    console.log(cur_attempt.url);
+
+    let jobsMetadata = await getJobsURL(cur_attempt.jobs_url);
+    console.log(jobsMetadata);
+};
+
+parseJson();
