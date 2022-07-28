@@ -13952,12 +13952,12 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
+// import libraries
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
-
 const axios = __nccwpck_require__(6545);
 
-
+// helper function that gets Github Actions logs
 async function getMetadata(){
     const repo_name = core.getInput("repo_name");
     const repo_owner = core.getInput("repo_owner");
@@ -13975,6 +13975,7 @@ async function getMetadata(){
 
 };
 
+// helper function that gets currentworkflow logs
 async function getJobsURL(jobsURL){
     let instance = axios.create({
         baseURL: '',
@@ -13987,8 +13988,18 @@ async function getJobsURL(jobsURL){
 }
 
 async function parseJson(){
+    // get raw metadata of the repo
     let rawMetadata = await getMetadata();
+
+    // get the latest attempt log messages
     let cur_attempt = rawMetadata.workflow_runs[0];
+
+    let jsonDict = {};
+
+    jsonDict["time"] = cur_attempt.created_at;
+    jsonDict["runid"] = cur_attempt.id;
+    jsonDict["repository"] = cur_attempt.repository.full_name;
+
     console.log(cur_attempt.created_at);
     console.log(cur_attempt.id);
     console.log(cur_attempt.name);
@@ -13996,7 +14007,21 @@ async function parseJson(){
     console.log(cur_attempt.url);
 
     let jobsMetadata = await getJobsURL(cur_attempt.jobs_url).catch(console.log("at parseJson"));
-    console.log(jobsMetadata);
+    
+    let jobsDict = {};
+    for (var i=0; i < jobsMetadata.jobs.length; i++){
+        let stepsDcit = {};
+        for (var j=0; j<jobsMetadata.jobs[i].steps.length; j++){
+            let curStepDict = {};
+            curStepDict["conclusion"] = jobsMetadata.jobs[i].steps[j].conclusion
+            curStepDict["status"] = jobsMetadata.jobs[i].steps[j].status
+            stepsDcit[jobsMetadata.jobs[i].steps[j].name] = curStepDict;
+        }
+        jobsDict[jobsMetadata.jobs[i].name] = stepsDcit;
+    }
+    jsonDict["jobs"] = jobsDict;
+    console.log(jsonDict);
+    // console.log(JSON.stringify(jsonDict));
 };
 
 parseJson().catch(console.log("at main"));
