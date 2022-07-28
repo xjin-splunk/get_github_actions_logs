@@ -60,5 +60,5 @@ jobs:
     steps:
       - run: |
           echo "let's see the workflow conclusion"
-          echo ${{ job.status }}
+          echo ${{ env.WORKFLOW_CONCLUSION }}
 
