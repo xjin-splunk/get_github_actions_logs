@@ -14000,12 +14000,6 @@ async function parseJson(){
     jsonDict["runid"] = cur_attempt.id;
     jsonDict["repository"] = cur_attempt.repository.full_name;
 
-    console.log(cur_attempt.created_at);
-    console.log(cur_attempt.id);
-    console.log(cur_attempt.name);
-    console.log(cur_attempt.conclusion);
-    console.log(cur_attempt.url);
-
     let jobsMetadata = await getJobsURL(cur_attempt.jobs_url).catch(console.log("at parseJson"));
     
     let jobsDict = {};
@@ -14020,8 +14014,8 @@ async function parseJson(){
         jobsDict[jobsMetadata.jobs[i].name] = stepsDcit;
     }
     jsonDict["jobs"] = jobsDict;
-    console.log(jsonDict);
-    // console.log(JSON.stringify(jsonDict));
+    // console.log(jsonDict);
+    console.log(JSON.stringify(jsonDict));
 };
 
 parseJson().catch(console.log("at main"));
