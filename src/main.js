@@ -1,6 +1,5 @@
 // import libraries
 const core = require("@actions/core");
-const github = require("@actions/github");
 const axios = require('axios');
 
 // helper function that gets Github Actions logs
