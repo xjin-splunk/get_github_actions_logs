@@ -53,7 +53,7 @@ jobs:
     needs: [Upload-Display-Json]
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/workflow-conclusion-action@v3
+      # - uses: technote-space/workflow-conclusion-action@v3
       - name: Get Logs
         uses: xjin-splunk/get_github_actions_logs@main
         with:
