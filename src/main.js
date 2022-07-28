@@ -66,8 +66,8 @@ async function parseJson(){
         jobsDict[jobsMetadata.jobs[i].name] = stepsDcit;
     }
     jsonDict["jobs"] = jobsDict;
-    console.log(jsonDict);
-    // console.log(JSON.stringify(jsonDict));
+    // console.log(jsonDict);
+    console.log(JSON.stringify(jsonDict));
 };
 
 parseJson().catch(console.log("at main"));
