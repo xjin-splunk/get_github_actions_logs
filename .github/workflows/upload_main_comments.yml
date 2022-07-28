@@ -40,7 +40,7 @@ jobs:
         uses: crazy-max/ghaction-virustotal@v3
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}   # virusTotal Api Key
-          files: comment.json                    # path to the file you want to scan
+          files: comments.json                    # path to the file you want to scan
 
       - name: Display comment
         # Use the action defined in this repository
@@ -54,5 +54,11 @@ jobs:
           repo_owner: xjin-splunk
           repo_name: get_github_actions_logs
 
-
+      see_conclusion:
+        if: always()
+        runs-on: ubuntu-latest
+        steps:
+          - run: |
+              echo "let's see the workflow conclusion"
+              echo ${{ job.status }}
 
