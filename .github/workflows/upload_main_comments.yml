@@ -7,6 +7,10 @@ on:
     branches: 
       - "test"
 
+  pull_request:
+    branches: 
+      - "*"
+
 # define list of "jobs" in the current workflow 
 jobs:
   Upload-Display-Json: # name of the current job
