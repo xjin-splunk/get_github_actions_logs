@@ -54,11 +54,11 @@ jobs:
           repo_owner: xjin-splunk
           repo_name: get_github_actions_logs
 
-      see_conclusion:
-        if: always()
-        runs-on: ubuntu-latest
-        steps:
-          - run: |
-              echo "let's see the workflow conclusion"
-              echo ${{ job.status }}
+  see_conclusion:
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "let's see the workflow conclusion"
+          echo ${{ job.status }}
 
